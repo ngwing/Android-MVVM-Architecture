@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Food Map</string>
+    <string name="loading_venues_error">Error while loading venues</string>
+    <string name="no_data">No data</string>
+    <string name="loading">LOADING</string>
+
+</resources>

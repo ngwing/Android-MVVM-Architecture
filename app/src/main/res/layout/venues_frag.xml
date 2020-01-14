@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="androidx.core.content.ContextCompat" />
+
+        <variable
+            name="viewmodel"
+            type="com.anthony.foodmap.ui.VenuesViewModel" />
+
+        <variable
+            name="venue"
+            type="com.anthony.foodmap.data.Venue" />
+
+        <variable
+            name="mapviewmodel"
+            type="com.anthony.foodmap.ui.MapViewModel" />
+
+    </data>
+
+
+    <FrameLayout
+        android:id="@+id/container_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/venue_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_margin="20dp"
+            android:background="@drawable/round_cornered_bg"
+            android:elevation="10dp"
+            android:orientation="vertical"
+            android:visibility="@{viewmodel.selectedItem != null? View.VISIBLE : View.GONE}">
+
+            <include
+                android:id="@+id/top_venue"
+                layout="@layout/venue_item"
+                app:mapviewmodel="@{mapviewmodel}"
+                app:venue="@{viewmodel.selectedItem}"
+                app:viewmodel="@{viewmodel}" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/venues_linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/list_height"
+            android:orientation="vertical"
+            android:layout_margin="20dp"
+            android:layout_gravity="bottom"
+            android:elevation="10dp"
+            android:background="@drawable/round_cornered_bg"
+            android:visibility="@{viewmodel.empty ? View.GONE : View.VISIBLE}">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/venues_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:items="@{viewmodel.items}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        </LinearLayout>
+    </FrameLayout>
+</layout>
+
