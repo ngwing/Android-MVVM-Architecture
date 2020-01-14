@@ -34,6 +34,7 @@ class MainActivityTest {
 
     @Before
     fun setup() {
+        dataBindingIdlingResource.activity = mActivityTestRule.activity
         IdlingRegistry.getInstance().register(EspressoIdlingResource.countingIdlingResource)
         IdlingRegistry.getInstance().register(dataBindingIdlingResource)
     }
