@@ -13,7 +13,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+        testInstrumentationRunner "com.anthony.foodmap.CustomTestRunner"
         multiDexEnabled true
     }
 
@@ -69,6 +69,7 @@ android {
 
     // Always show the result of every unit test, even if it passes.
     testOptions.unitTests {
+
         includeAndroidResources = true
 
         all {
@@ -152,6 +153,9 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:$daggerVersion"
     kapt "com.google.dagger:dagger-android-support:$daggerVersion"
 
+    kaptTest "com.google.dagger:dagger-compiler:$daggerVersion"
+    kaptAndroidTest "com.google.dagger:dagger-compiler:$daggerVersion"
+
 
 
     // Dependencies for local unit tests
@@ -166,6 +170,9 @@ dependencies {
     testImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
     testImplementation "androidx.test.espresso:espresso-intents:$espressoVersion"
     testImplementation "com.google.truth:truth:$truthVersion"
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.5.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.2'
+    testImplementation 'org.junit.platform:junit-platform-runner:1.5.2'
 
     // Dependencies for Android unit tests
     androidTestImplementation "junit:junit:$junitVersion"
@@ -207,7 +214,6 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:$fragmentKtxVersion"
 
 
-    implementation 'com.github.florent37:expectanim:1.0.7'
     implementation 'com.daimajia.easing:library:2.0@aar'
     implementation 'com.daimajia.androidanimations:library:2.3@aar'
 
@@ -218,11 +224,6 @@ dependencies {
     implementation "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
     implementation "com.android.support:support-vector-drawable:$appcompatVersion"
 
-
-    //Testing libs
-    testImplementation "junit:junit:$jUnitVersion"
-    androidTestImplementation "com.android.support.test:runner:$runnerVersion"
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoVersion"
 
     //RxJava
     implementation 'io.reactivex.rxjava2:rxjava:2.1.9'
@@ -250,12 +251,6 @@ dependencies {
 
     //Crashlytics
     implementation "com.crashlytics.sdk.android:crashlytics:$crashlyticsVersion"
-
-    //HyperLog
-    implementation 'com.hypertrack:hyperlog:0.0.9'
-
-    //Google Authentication
-    implementation "com.google.android.gms:play-services-auth:$googleSignInVersion"
 
     //MultiDex
     implementation "com.android.support:multidex:$multiDexVersion"

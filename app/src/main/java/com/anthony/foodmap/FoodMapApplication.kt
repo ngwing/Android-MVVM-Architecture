@@ -10,10 +10,10 @@ import timber.log.Timber
 import timber.log.Timber.DebugTree
 import javax.inject.Inject
 
-class FoodMapApplication : DaggerApplication() {
+open class FoodMapApplication : DaggerApplication() {
 
     @Inject
-    lateinit var taskRepository: VenuesRepository
+    lateinit var venuesRepository: VenuesRepository
 
 
     override fun onCreate() {
@@ -21,7 +21,7 @@ class FoodMapApplication : DaggerApplication() {
         if (BuildConfig.DEBUG) Timber.plant(DebugTree())
     }
 
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication?> {
         return DaggerFoodMapComponent.builder().create(this)
     }
 

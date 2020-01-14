@@ -25,11 +25,11 @@ import com.anthony.foodmap.FoodMapApplication
 import com.anthony.foodmap.ViewModelFactory
 
 fun Fragment.getViewModelFactory(): ViewModelFactory {
-    val repository = (requireContext().applicationContext as FoodMapApplication).taskRepository
+    val repository = (requireContext().applicationContext as FoodMapApplication).venuesRepository
     return ViewModelFactory(repository)
 }
 
 fun Activity.getViewModelFactory(): ViewModelFactory {
-    val repository = (applicationContext as FoodMapApplication).taskRepository
+    val repository = (applicationContext as FoodMapApplication).venuesRepository
     return ViewModelFactory(repository)
 }
