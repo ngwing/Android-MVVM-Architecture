@@ -1,5 +1,6 @@
 package com.anthony.foodmap
 
+import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -11,6 +12,7 @@ import androidx.test.rule.ActivityTestRule
 import com.anthony.foodmap.ui.MainActivity
 import com.anthony.foodmap.util.DataBindingIdlingResource
 import com.anthony.foodmap.util.EspressoIdlingResource
+import com.anthony.foodmap.util.monitorActivity
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -32,16 +34,16 @@ class MainActivityTest {
     // An Idling Resource that waits for Data Binding to have no pending bindings
     private val dataBindingIdlingResource = DataBindingIdlingResource()
 
+    /**
+     * Idling resources tell Espresso that the app is idle or busy. This is needed when operations
+     * are not scheduled in the main Looper (for example when executed on a different thread).
+     */
     @Before
     fun setup() {
         dataBindingIdlingResource.activity = mActivityTestRule.activity
         IdlingRegistry.getInstance().register(EspressoIdlingResource.countingIdlingResource)
         IdlingRegistry.getInstance().register(dataBindingIdlingResource)
     }
-    /**
-     * Idling resources tell Espresso that the app is idle or busy. This is needed when operations
-     * are not scheduled in the main Looper (for example when executed on a different thread).
-     */
 
     /**
      * Unregister your Idling Resource so it can be garbage collected and does not leak any memory.
@@ -54,6 +56,8 @@ class MainActivityTest {
 
     @Test
     fun testView() {
-        onView(withId(R.id.venues_list)).check(matches(isDisplayed()))
+        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
+        dataBindingIdlingResource.monitorActivity(activityScenario)
+        onView(withId(R.id.map_container)).check(matches(isDisplayed()))
     }
 }
